@@ -38,7 +38,7 @@ def get_user_input():
         remaining -= letters
         digits = get_valid_int(f"How Many Numbers To Use?\nRemaining: {remaining}", 0, remaining)
         remaining -= digits
-        retards = get_valid_int(f"How Many Retarded Characters to Use?\nRemaining: {remaining}", 0, remaining)
+        retards = get_valid_int(f"How Many Characters to Use?\nRemaining: {remaining}", 0, remaining)
         remaining -= retards
         if (remaining != 0): 
            print_error("Combined Values Must Equal Password Size. Please Try Again.")
@@ -67,7 +67,7 @@ def generate_password(chars:int, numbers:int, special:int):
 def log_password(pw:str, chars:int, numbers:int, special:int):
     print("Generated Password: " + pw)
     print("------------------")
-    print(f"Letters: {chars}\nDigits: {numbers}\nRetarded Characters: {special}\n")
+    print(f"Letters: {chars}\nDigits: {numbers}\nCharacters: {special}\n")
 
 ## Saves Password To Desired Path As A Text Document, Appends If File Exsists.
 def save_password(path:str, password:str):
