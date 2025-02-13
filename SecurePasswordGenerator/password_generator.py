@@ -7,25 +7,6 @@ PW_MAX = 20
 
 SAVE_PATH = ""
 
-##Clears the Console Screen And Prints Desired Error Message
-def print_error(message:str):
-    system("cls")
-    print(message)
-
-## Continues To Prompt User For A Value Between Min & Max Until Validation Success.
-def get_valid_int(prompt:str, min:int, max:int):
-    isValid = False
-    while (not isValid):
-        user_in = input(prompt+"\n>")
-        if (user_in.isnumeric()):
-            user_in = int(user_in)
-            if (user_in > min-1 and user_in < max+1):
-                system("cls")
-                isValid = True
-                return user_in
-            else: print_error(f"Invalid Number: Number Out Of Bounds")
-        else: print_error("Invalid Input: Value Must Be Numeric")
-
 ## Main Function Used To Collect Input From User While Validating.
 def get_user_input():
     system("cls")
@@ -75,9 +56,29 @@ def save_password(path:str, password:str):
         with open(path+"/password.txt", "a") as file:
             file.write(f"Generated Password: {password}\n")
 
+## Continues To Prompt User For A Value Between Min & Max Until Validation Success.
+def get_valid_int(prompt:str, min:int, max:int):
+    isValid = False
+    while (not isValid):
+        user_in = input(prompt+"\n>")
+        if (user_in.isnumeric()):
+            user_in = int(user_in)
+            if (user_in > min-1 and user_in < max+1):
+                system("cls")
+                isValid = True
+                return user_in
+            else: print_error(f"Invalid Number: Number Out Of Bounds")
+        else: print_error("Invalid Input: Value Must Be Numeric")
+
+##Clears the Console Screen And Prints Desired Error Message
+def print_error(message:str):
+    system("cls")
+    print(message)
+
 def get_random_char(): return random.choice(string.ascii_letters)
 def get_random_digit(): return random.choice(string.digits)
 def get_random_retard(): return random.choice(string.punctuation)
 
-system("cls")
-get_user_input()
+if (__name__ == "__main__"):
+    system("cls")
+    get_user_input()
