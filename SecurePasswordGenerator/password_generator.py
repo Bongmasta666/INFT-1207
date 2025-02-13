@@ -6,12 +6,12 @@ PW_MIN = 8
 PW_MAX = 20
 
 ##Clears the Console Screen And Prints Desired Error Message
-def printError(message:str):
+def print_error(message:str):
     system("cls")
     print(message)
 
 ## Continues To Prompt User For A Value Between Min & Max Until Validation Success.
-def getValidInt(prompt:str, min:int, max:int):
+def get_valid_int(prompt:str, min:int, max:int):
     isValid = False
     while (not isValid):
         user_in = input(prompt+"\n>")
@@ -21,54 +21,54 @@ def getValidInt(prompt:str, min:int, max:int):
                 system("cls")
                 isValid = True
                 return user_in
-            else: printError(f"Invalid Number: Number Out Of Bounds")
-        else: printError("Invalid Input: Value Must Be Numeric")
+            else: print_error(f"Invalid Number: Number Out Of Bounds")
+        else: print_error("Invalid Input: Value Must Be Numeric")
 
 ## Main Function Used To Collect Input From User While Validating.
-def getUserValues():
+def get_user_input():
     system("cls")
     isValid = False
-    pw_size = getValidInt("Select A Password Size Between 8-20", PW_MIN, PW_MAX)
+    pw_size = get_valid_int("Select A Password Size Between 8-20", PW_MIN, PW_MAX)
 
     while (not isValid):
         remaining = pw_size
-        letters = getValidInt(f"How Many Letters To Use?\nRemaining: {remaining}", 0, remaining)
+        letters = get_valid_int(f"How Many Letters To Use?\nRemaining: {remaining}", 0, remaining)
         remaining -= letters
-        digits = getValidInt(f"How Many Numbers To Use?\nRemaining: {remaining}", 0, remaining)
+        digits = get_valid_int(f"How Many Numbers To Use?\nRemaining: {remaining}", 0, remaining)
         remaining -= digits
-        retards = getValidInt(f"How Many Retarded Characters to Use?\nRemaining: {remaining}", 0, remaining)
+        retards = get_valid_int(f"How Many Retarded Characters to Use?\nRemaining: {remaining}", 0, remaining)
         remaining -= retards
         if (remaining != 0): 
-           printError("Combined Values Must Equal Password Size. Please Try Again.")
+           print_error("Combined Values Must Equal Password Size. Please Try Again.")
         else: 
-            pw = genPW(letters, digits, retards)
-            logPw(pw, letters, digits, retards)
+            pw = generate_password(letters, digits, retards)
+            log_password(pw, letters, digits, retards)
             isValid = True
 
 ## Returns A String of Random Letter, Numbers, and Characters Based on Parameters.
-def genPW(chars:int, numbers:int, special:int):
+def generate_password(chars:int, numbers:int, special:int):
     out = ""
     contents = []
     for x in range(chars):
-        contents.append(getRandomChar())
+        contents.append(get_random_char())
     for y in range(numbers):
-        contents.append(getRandomDigit())
+        contents.append(get_random_digit())
     for z in range(special):
-        contents.append(getRandomRetard())
+        contents.append(get_random_retard())
     random.shuffle(contents)
     for n in range(len(contents)):
         out += contents[n]
     return out
 
 ## Logs Password and Values to Console For Debugging?
-def logPw(pw:str, chars:int, numbers:int, special:int):
+def log_password(pw:str, chars:int, numbers:int, special:int):
     print("Generated Password: " + pw)
     print("------------------")
     print(f"Letters: {chars}\nDigits: {numbers}\nRetarded Characters: {special}\n")
 
-def getRandomChar(): return random.choice(string.ascii_letters)
-def getRandomDigit(): return random.choice(string.digits)
-def getRandomRetard(): return random.choice(string.punctuation)
+def get_random_char(): return random.choice(string.ascii_letters)
+def get_random_digit(): return random.choice(string.digits)
+def get_random_retard(): return random.choice(string.punctuation)
 
 system("cls")
-getUserValues()
+get_user_input()
