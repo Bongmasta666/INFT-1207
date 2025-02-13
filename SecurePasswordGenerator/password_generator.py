@@ -5,6 +5,8 @@ from os import system
 PW_MIN = 8
 PW_MAX = 20
 
+SAVE_PATH = ""
+
 ##Clears the Console Screen And Prints Desired Error Message
 def print_error(message:str):
     system("cls")
@@ -43,6 +45,7 @@ def get_user_input():
         else: 
             pw = generate_password(letters, digits, retards)
             log_password(pw, letters, digits, retards)
+            save_password(SAVE_PATH, pw)
             isValid = True
 
 ## Returns A String of Random Letter, Numbers, and Characters Based on Parameters.
@@ -65,6 +68,12 @@ def log_password(pw:str, chars:int, numbers:int, special:int):
     print("Generated Password: " + pw)
     print("------------------")
     print(f"Letters: {chars}\nDigits: {numbers}\nRetarded Characters: {special}\n")
+
+## Saves Password To Desired Path As A Text Document, Appends If File Exsists.
+def save_password(path:str, password:str):
+    if (len(path) > 0):
+        with open(path+"/password.txt", "a") as file:
+            file.write(f"Generated Password: {password}\n")
 
 def get_random_char(): return random.choice(string.ascii_letters)
 def get_random_digit(): return random.choice(string.digits)
