@@ -50,7 +50,7 @@ def remove_item(e):
 
 ## INTERFACE IMPLEMENTATION ##
 FONT = "rockwell 11"
-HEADER_TEXT = "Temperature Readings (c)\n( -50 - 150 )"
+HEADER_TEXT = f"Temperature Readings (c)\n( {MIN_TEMP} - {MAX_TEMP} )"
 BGC_MAIN = "#232323"
 
 root = Tk()
